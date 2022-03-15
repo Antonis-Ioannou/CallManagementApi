@@ -1,0 +1,60 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Calls List</h2>
+
+<h2>Product List</h2>
+<button id="createBtn" class="btn-success">Create product</button>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="calls">
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $.ajax({
+            url: "https://localhost:44389/api/Calls",
+            type: "GET",
+            data: "",
+            dataType: "json",
+            success: function (response) {
+                for (var item of response) {
+                    $("#calls").append(`
+                                            <tr>
+                                                <td>${item.CallsId}</td>
+                                                <td>${item.TypeId}</td>
+                                            </tr>
+                                            `);
+                }
+            }
+        });
+
+        $("#createBtn").click(function (e) {
+            window.location.replace("/Products/Create");
+        })
+
+        //$("#editBtn").click(function (e) {
+        //    window.location.replace("/Products/Edit/${product.ProductId}");
+        //})
+
+        //$("#editBtn").click(function (e) {
+        //    window.location.href("/Products/Edit/${product.ProductId}");
+        //})
+
+    </script>
+}
