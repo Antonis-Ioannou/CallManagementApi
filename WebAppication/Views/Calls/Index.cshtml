@@ -28,11 +28,10 @@
 @section scripts{
     <script>
         $.ajax({
-            url: "https://localhost:44389/api/calls",
+            url: "https://localhost:44389/api/Calls",
             type: "GET",
             data: "",
-            dataType: "jsonp",
-            crossDomain: true,
+            dataType: "json",
             success: function (response) {
                 for (var call of response) {
                     $("#call").append(          `
