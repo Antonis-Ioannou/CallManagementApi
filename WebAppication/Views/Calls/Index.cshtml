@@ -1,0 +1,68 @@
+﻿@using WebApi.Models
+@model WebApi.Models.Calls
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Calls List</h2>
+<button id="createBtn" class="btn-success">Create Call</button>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Creation Date</th>
+            <th>Type</th>
+            <th>Receiver</th>
+            <th>Call Contact</th>
+            <th>Notes</th>
+            <th>Modified Date</th>
+        </tr>
+    </thead>
+    <tbody id="call">
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $.ajax({
+            url: "https://localhost:44389/api/calls",
+            type: "GET",
+            data: "",
+            dataType: "jsonp",
+            crossDomain: true,
+            success: function (response) {
+                for (var call of response) {
+                    $("#call").append(          `
+                                                <tr>
+                                                    <td>${call.CallsId}</td>
+                                                    <td>${call.CreationDate}</td>
+                                                    <td>${call.TypeId}</td>
+                                                    <td>${call.ReceiverId}</td>
+                                                    <td>${call.CallContactId}</td>
+                                                    <td>${call.Notes}</td>
+                                                    <td>${call.ModifiedDate}</td>
+                                                    <td><a href="/Products/Edit/${call.CallsId}">Edit</a> | <a href="/Products/Delete/${call.CallsId}">Delete</a> </td>
+                                                    <td><button id="editBtn" class="btn-info"><a href="/Products/Edit/${call.CallsId}">Edit</a></button> | <button id="editBtn" class="btn-danger">Delete</button> </td>
+                                                </tr>
+                                                `);
+                }
+            }
+        });
+
+        //$("#createBtn").click(function (e) {
+        //    window.location.replace("/Products/Create");
+        //})
+
+        //$("#editBtn").click(function (e) {
+        //    window.location.replace("/Products/Edit/${product.ProductId}");
+        //})
+
+        //$("#editBtn").click(function (e) {
+        //    window.location.href("/Products/Edit/${product.ProductId}");
+        //})
+
+    </script>
+}
